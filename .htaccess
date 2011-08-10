@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /monkimvc/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([A-Za-z]+)/?$ index.php?controller=$1&%{QUERY_STRING} [L]
+RewriteRule ^([A-Za-z]+)/([A-Za-z]+)/?$ index.php?controller=$1&action=$2&%{QUERY_STRING} [L]
+
