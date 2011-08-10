@@ -1,0 +1,25 @@
+base tables for
+
+Functions
+-initalize db connection
+-layout selection
+
+Readme
+-how to install
+-file structure guide
+-how to contribute
+
+
+Classes
+- Db - just like on ZF
+- Session
+
+
+Low Prio
+- caching - guide: http://net.tutsplus.com/tutorials/javascript-ajax/how-to-build-an-rss-reader-with-jquery-mobile-2/
+- third party apps
+--library - zf/templating/etc
+
+
+
+
