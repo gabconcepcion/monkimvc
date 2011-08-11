@@ -42,4 +42,11 @@ $oController = $oLoader->loadController($controller);
 //call action
 $oController->$action();
 
-$oLoader->renderView($oController, $action);
+
+//set variables for view
+$aVars = get_object_vars($oController->view);
+foreach($aVars as $key=>$val)
+{
+	$$key = $val;
+}
+include("/applications/views/{$controller}/$action.php");
