@@ -1,6 +1,5 @@
-base tables for
 
-Functions
+
 -initalize db connection
 -layout selection
 
@@ -19,6 +18,7 @@ Low Prio
 - caching - guide: http://net.tutsplus.com/tutorials/javascript-ajax/how-to-build-an-rss-reader-with-jquery-mobile-2/
 - third party apps
 --library - zf/templating/etc
+- sqlite support - for small projects (ex: url shortener, qr code, etc..)
 
 
 
