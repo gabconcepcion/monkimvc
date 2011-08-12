@@ -1,5 +1,4 @@
 
-
 -initalize db connection
 -layout selection
 
@@ -12,6 +11,7 @@ Readme
 Classes
 - Db - just like on ZF
 - Session
+- Request - $_POST/$_GET/$_FILE/redirect
 
 
 Low Prio
