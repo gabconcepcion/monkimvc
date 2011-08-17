@@ -1,0 +1,9 @@
+
+[db]
+host = 'localhost'
+dbname = 'monki'
+user = 'root'
+password = ''
+
+[app_var]
+system_mailer = "no-reply@localhost.com";

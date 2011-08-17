@@ -1,6 +1,6 @@
 <?php
 
-class Users extends Model
+class User extends Model
 {
 	
 }
