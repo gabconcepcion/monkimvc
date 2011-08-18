@@ -12,7 +12,7 @@ class Request extends Controller
         return (empty($_GET));    
     }
     
-    function hasFiles()
+    function hasFile()
     {
         return (empty($_FILES));    
     }    
