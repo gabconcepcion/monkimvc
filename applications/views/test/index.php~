@@ -1,8 +1,0 @@
-<?php
-
-echo '<br/><b>*Make sure that the Zend library exists on dir ../library or /libary*</b>';
-
-echo '<br/>Zend_Json::encode: '.$json;
-echo '<br/>Zend_Json::decode: <pre>'.var_export(Zend_Json::decode($json), true).'</pre>';
-
-var_export(get_include_path());

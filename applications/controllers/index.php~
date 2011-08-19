@@ -1,9 +1,0 @@
-<?php
-
-class IndexController
-{
-	function index()
-	{
-		echo 2;
-	}
-}
