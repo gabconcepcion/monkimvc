@@ -4,8 +4,9 @@ class Monki_Controller
 {
 	var $view = null; 
 	public $noRender = false;
+    private $_oDb;
 	
-	function __construct()
+	function __construct($oDb)
 	{
 		$this->view = new Monki_View();
 	}

@@ -1,5 +1,10 @@
 <?php
 set_time_limit(0);
+
+$_protocol = $_SERVER['HTTPS'] ? "https" : "http";
+$_base_url = $_protocol . "://" . $_SERVER['HTTP_HOST'];
+define('BASE_URL', $_base_url.'/monkimvc/');
+
 define('APPLICATION_PATH', './applications/');
 // use ../library, if library dir is located outside this framework
 define('LIBRARY_PATH', '../library/');
@@ -14,7 +19,7 @@ if($_SERVER['SERVER_ADDR']=='127.0.0.1')
 	$sConfigFile = 'development';
 }
 //load config
-$aConfig = parse_ini_file("applications/{$sConfigFile}.ini", true);
+$aConfig = parse_ini_file(APPLICATION_PATH."{$sConfigFile}.ini", true);
 
 set_include_path(implode(PATH_SEPARATOR,array(
 	'.',         
@@ -39,8 +44,27 @@ $oLoader->loadClass('Monki_View');
 $oLoader->loadClass('Monki_Model');
 $oLoader->loadClass('Monki_Controller');
 
-$oController = $oLoader->loadClass($controller);
-$oController = new $controller();
+//database settings
+$oDb = null
+$aDbConfig = $aConfig['db'];
+if($aDbConfig['type']==='mysql')
+{
+    $aParams = array(
+        'host'=>$aDbConfig['host'],
+        'user'=>$aDbConfig['user'],
+        'password'=>$aDbConfig['password'],
+        'dbname'=>$aDbConfig['dbname'],
+    );
+    $oDb = new Monki_Db_MySQL_Handler($aParams);
+}
+elseif($aDbConfig['type']==='sqlite')
+{
+    $oDb = new Monki_Db_SQLite_Handler($aDbConfig['sqlite_file']);
+}
+
+//database connection
+$oLoader->loadClass($controller);
+$oController = new $controller($oDb);
 
 //constants
 $oLoader->loadClass('Constants');

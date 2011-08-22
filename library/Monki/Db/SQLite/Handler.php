@@ -6,7 +6,8 @@ class Monki_Db_SQLite_Handler
 	
 	function __construct($file)
 	{
-		$this->_oDb = new SQLite3($file);	
+		$this->_oDb = new SQLite3($file);
+        return $this;
 	}
 	
 	function escapeString($sql)

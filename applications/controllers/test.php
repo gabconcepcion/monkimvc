@@ -2,19 +2,32 @@
 
 class Test extends Monki_Controller
 {
-	function index()
-	{
-		$data = array('text'=>'Hello World');
-		                                     
-		Zend_Loader::loadClass('Zend_Json');
-		$this->view->json = Zend_Json::encode($data);
-		
-		Zend_Loader::loadClass('Zend_Locale');
-		$oMyLocale = new Zend_Locale(Zend_Locale::BROWSER);
-		
-		$this->view->myLocale = $oMyLocale->toString();
-		
-	}
+    function index()
+    {
+        $a = get_class_methods($this);
+    	
+    	echo '<b>Test</b><br/>';
+    	foreach($a as $m)
+    	{
+    		if($m == '__construct' || $m == 'index') continue;
+    			echo '<a href="'.BASE_URL.$m.'">/monkimvc/'.$m.'</a><br/>';
+    	}
+    }
+    
+    function mysql()
+    {
+        $aParams = array(
+            'host'=>'localhost',
+            'user'=>'root',
+            'password'=>'',
+            'dbname'=>'monkimvc',
+        );
+        $oDb = new Monki_Db_MySQL_Handler($aParams);
+        
+        $sSql = 'SELECT * FROM posts WHERE 1';
+        $aPosts = $oDb->fetchAll($sSql);
+        var_export($aPosts);
+    }
 	
 	function hybridAuth()
 	{

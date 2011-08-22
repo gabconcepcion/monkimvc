@@ -1,7 +1,12 @@
 <?php
 
 class Home extends Monki_Controller
-{
+{    
+    function __construct($_oDb=null)
+    {
+            $this->_oDb = $_oDb;
+    }
+    
 	function index()
 	{
 		Monki_Loader::loadClass('User');
