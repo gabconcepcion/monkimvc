@@ -4,19 +4,37 @@ class Test extends Monki_Controller
 {
         function index()
         {
+                $this->setNoRender();
                 $a = get_class_methods($this);
                 
                 echo '<b>Test</b><br/>';
                 foreach($a as $m)
                 {
-                        if($m == '__construct' || $m == 'index') continue;
-                                echo '<a href="'.BASE_URL.$m.'">/monkimvc/'.$m.'</a><br/>';
+                        if($m == '__construct' || $m == 'index' || $m == 'setNoRender') continue;
+                                echo '<a href="'.BASE_URL.'test/'.$m.'">/monkimvc/test/'.$m.'</a><br/>';
                 }
+        }
+        
+        function zend()
+        {                
+                //monkimvc/../library/Zend
+		require_once(APPLICATION_PATH.'../../library/Zend/Loader.php');      
+                
+		Zend_Loader::loadClass('Zend_Json');
+		
+        	$data = array('text'=>'Hello World');   
+		$this->view->json = Zend_Json::encode($data);
+		
+		Zend_Loader::loadClass('Zend_Locale');
+		$oMyLocale = new Zend_Locale(Zend_Locale::BROWSER);
+		
+		$this->view->myLocale = $oMyLocale->toString();
         }
         
         function mysql()
         {
                 $this->setNoRender();
+                
                 $aParams = array(
                         'host'=>'localhost',
                         'user'=>'root',
@@ -37,7 +55,8 @@ class Test extends Monki_Controller
 		
 		$this->setNoRender();
 		
-		include(LIBRARY_PATH.'hybridauth/hybridauth.php');
+                //monkimvc/../library/hybridauth
+        	require_once(APPLICATION_PATH.'../../library/hybridauth/hybridauth.php');
 		$oHybridAuth = new Hybrid_Auth();
 		
 		if( $oHybridAuth->hasError() )

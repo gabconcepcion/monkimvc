@@ -29,6 +29,10 @@ set_include_path(implode(PATH_SEPARATOR,array(
 	get_include_path()
 )));
 require_once('Monki/Loader.php');
+
+//sanitize controller/action request
+$_GET['controller'] = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['controller']);
+$_GET['action'] = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['action']);
 	
 //load controller
 $controller = $_GET['controller'];
@@ -85,7 +89,7 @@ foreach($aVars as $key=>$val)
 }
 
 //output the view
-ob_start("ob_gzhandler");
+ob_start();
 
 if(!$oController->noRender)
 	include("/applications/views/{$controller}/$action.php");
