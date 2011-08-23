@@ -7,7 +7,7 @@ define('BASE_URL', $_base_url.'/monkimvc/');
 
 define('APPLICATION_PATH', './applications/');
 // use ../library, if library dir is located outside this framework
-define('LIBRARY_PATH', '../library/');
+define('LIBRARY_PATH', './library/');
 
 $sConfigFile = 'default';
 if($_SERVER['SERVER_ADDR']=='127.0.0.1')
@@ -45,7 +45,7 @@ $oLoader->loadClass('Monki_Model');
 $oLoader->loadClass('Monki_Controller');
 
 //database settings
-$oDb = null
+$oDb = null;
 $aDbConfig = $aConfig['db'];
 if($aDbConfig['type']==='mysql')
 {
@@ -55,10 +55,12 @@ if($aDbConfig['type']==='mysql')
         'password'=>$aDbConfig['password'],
         'dbname'=>$aDbConfig['dbname'],
     );
+    $oLoader->loadClass('Monki_Db_MySQL_Handler');
     $oDb = new Monki_Db_MySQL_Handler($aParams);
 }
 elseif($aDbConfig['type']==='sqlite')
 {
+    $oLoader->loadClass('Monki_Db_SQLite_Handler');
     $oDb = new Monki_Db_SQLite_Handler($aDbConfig['sqlite_file']);
 }
 

@@ -2,32 +2,34 @@
 
 class Test extends Monki_Controller
 {
-    function index()
-    {
-        $a = get_class_methods($this);
-    	
-    	echo '<b>Test</b><br/>';
-    	foreach($a as $m)
-    	{
-    		if($m == '__construct' || $m == 'index') continue;
-    			echo '<a href="'.BASE_URL.$m.'">/monkimvc/'.$m.'</a><br/>';
-    	}
-    }
-    
-    function mysql()
-    {
-        $aParams = array(
-            'host'=>'localhost',
-            'user'=>'root',
-            'password'=>'',
-            'dbname'=>'monkimvc',
-        );
-        $oDb = new Monki_Db_MySQL_Handler($aParams);
+        function index()
+        {
+                $a = get_class_methods($this);
+                
+                echo '<b>Test</b><br/>';
+                foreach($a as $m)
+                {
+                        if($m == '__construct' || $m == 'index') continue;
+                                echo '<a href="'.BASE_URL.$m.'">/monkimvc/'.$m.'</a><br/>';
+                }
+        }
         
-        $sSql = 'SELECT * FROM posts WHERE 1';
-        $aPosts = $oDb->fetchAll($sSql);
-        var_export($aPosts);
-    }
+        function mysql()
+        {
+                $this->setNoRender();
+                $aParams = array(
+                        'host'=>'localhost',
+                        'user'=>'root',
+                        'password'=>'',
+                        'dbname'=>'monkimvc',
+                );
+                Monki_Loader::loadClass('Monki_Db_MySQL_Handler');
+                $oDb = new Monki_Db_MySQL_Handler($aParams);
+                
+                $sSql = 'SELECT * FROM posts WHERE 1';
+                $aPosts = $oDb->fetchAll($sSql);
+                var_export($aPosts);
+        }
 	
 	function hybridAuth()
 	{
