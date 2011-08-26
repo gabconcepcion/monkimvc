@@ -1,3 +1,4 @@
+
 <?php
 
 class Monki_Db_MySQL_Handler
@@ -16,10 +17,14 @@ class Monki_Db_MySQL_Handler
         
         function query($sql)
         {
-                $sql = $this->cleanString($sql);
-                $query = mysql_query($sql);
-                $result = mysql_fetch_array($query);
-                return $result;
+            $sql = $this->cleanString($sql);
+            $query = mysql_query($sql);
+            
+            $result = array();
+            
+            while($row = mysql_fetch_array($query))
+                    array_push($result, $row);
+            return $result;
         }
     
         function fetchAll($sql)

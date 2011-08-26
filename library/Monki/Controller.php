@@ -2,12 +2,13 @@
 
 class Monki_Controller
 {
-	var $view = null; 
-	public $noRender = false;
+    var $view = null; 
+    public $noRender = false;
     private $_oDb;
 	
 	function __construct($oDb)
 	{
+        $this->$_oDb = $oDb;
 		$this->view = new Monki_View();
 	}
 	

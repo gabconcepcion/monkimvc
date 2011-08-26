@@ -70,7 +70,11 @@ elseif($aDbConfig['type']==='sqlite')
 
 //database connection
 $oLoader->loadClass($controller);
-$oController = new $controller($oDb);
+
+if(class_exists($controller))
+    $oController = new $controller($oDb);
+else
+    die("Internal Server Error: {$controller} does not exists.");
 
 //constants
 $oLoader->loadClass('Constants');
@@ -79,7 +83,10 @@ $oLoader->loadClass('Constants');
 include('applications/Bootstrap.php');
 
 //call action
-$oController->$action();
+if(method_exists($oController, $action))
+    $oController->$action();
+else
+    die("Internal Server Error: {$action} does not exists.");
 
 //set variables for view
 $aVars = get_object_vars($oController->view);
