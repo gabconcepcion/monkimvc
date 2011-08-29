@@ -10,6 +10,22 @@ class Monki_Db_MySQL_Handler
                 return $this;
         }
         
+        function beginTransaction()
+        {
+            mysql_query('START TRANSACTION');
+        }
+        
+        function commit()
+        {
+            mysql_query('COMMIT');
+        }
+        
+        function rollback()
+        {
+            mysql_query('ROLLBACK');
+        }
+        
+        
         private function cleanString($sql)
         {
                 return mysql_real_escape_string($sql);
