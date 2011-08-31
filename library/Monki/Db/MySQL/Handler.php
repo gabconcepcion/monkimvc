@@ -1,4 +1,3 @@
-
 <?php
 
 class Monki_Db_MySQL_Handler

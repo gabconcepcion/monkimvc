@@ -48,6 +48,9 @@ $oLoader->loadClass('Monki_View');
 $oLoader->loadClass('Monki_Model');
 $oLoader->loadClass('Monki_Controller');
 
+$oLoader->loadClass('Monki_Session');
+$oLoader->loadClass('Monki_Request');
+
 //database settings
 $oDb = null;
 $aDbConfig = $aConfig['db'];

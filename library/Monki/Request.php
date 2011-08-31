@@ -2,6 +2,11 @@
 
 class Request extends Controller
 {
+    function redirect($url)
+    {
+        header('location: '.$url);
+    }
+        
     function isPost()
     {
         return (empty($_POST));    
