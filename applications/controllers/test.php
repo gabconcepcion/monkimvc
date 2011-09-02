@@ -15,6 +15,16 @@ class Test extends Monki_Controller
                 }
         }
         
+        function json()
+        {
+                $this->setNoRender();
+                
+                $aResult = array('bonana', 'banana');
+                
+		header('Content-Type: application/json');	
+		echo Zend_Json::encode($aResult);        	
+        }
+        
         function zend()
         {                
                 //monkimvc/../library/Zend
