@@ -6,8 +6,22 @@ class Monki_Db_SQLite_Handler
 	
 	function __construct($file)
 	{
-		$this->_oDb = new SQLite3($file);
-        return $this;
+        try
+    	{
+        	if( !$this->_oDb = new SQLite3($file) )
+            {
+                if( !$this->_oDb =SQLiteDatabase($file) )
+                {
+                    throw new Exception('SQLite is not supported on this server!');
+                }
+            }   
+        
+            return $this;
+    	}
+        catch($e)
+        {
+            throw($e);
+        }
 	}
 	
 	function escapeString($sql)
