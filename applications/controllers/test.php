@@ -59,6 +59,19 @@ class Test extends Monki_Controller
                 var_export($aPosts);
         }
 	
+	function sqlite()
+	{
+		$this->setNoRender();
+		
+		$file = APPLICATION_PATH.'sql/db.sqlite';
+		
+		Monki_Loader::loadClass('Monki_Db_SQLite_Handler');
+		$oSQLite = new Monki_Db_SQLite_Handler($file);
+		
+		$aResult = $oSQLite->fetchRow("SELECT * FROM posts");
+		var_export($aResult);
+	}
+	
 	function hybridAuth()
 	{
 		//ref: http://hybridauth.sourceforge.net/
@@ -129,18 +142,5 @@ class Test extends Monki_Controller
 				&nbsp;&nbsp;<a href="?provider=Yahoo">Sign-in with Yahoo</a><br /> 
 			';
 		}
-	}
-	
-	function sqlite()
-	{
-		$this->setNoRender();
-		
-		$file = APPLICATION_PATH.'sql/db.sqlite';
-		
-		Monki_Loader::loadClass('Monki_Db_SQLite_Handler');
-		$oSQLite = new Monki_Db_SQLite_Handler($file);
-		
-		$aResult = $oSQLite->fetchRow("SELECT * FROM posts");
-		var_export($aResult);
 	}
 }
